@@ -5,23 +5,50 @@
 {% endblock %}
 
 {% block body %}
-    <form action="" method="post">
-        <label for="petName">Nombe de la mascota</label>
-        <input type="text" name="petname" id="petname"> <br>
+    <form action="" method="post" novalidate>
+        {{ form.hidden_tag() }}
+        <div>
+            {{ form.petName.label }}
+            {{ form.petName(size=50) }} <br>
+            {% for error in form.petName.errors %}
+            <span style="color: red; "> {{ error }}</span>
+            {% endfor %}
+        </div>
 
-        <label for="datePet">Fecha de nacimiento/mascota</label>
-        <input type="date" name="datePet" id="datePet"> <br>
+        <div>
+            {{ form.datePet.label }}
+            {{ form.datePet(size=50) }} <br>
+            {% for error in form.datePet.errors %}
+            <span style="color: red; "> {{ error }}</span>
+            {% endfor %}
 
-        <label for="race"> Raza </label>
-        <input type="text" name="race" id="race"> <br>
+            <div>
+                {{ form.race.label }}
+                {{ form.race(size=50) }} <br>
+                {% for error in form.race.errors %}
+                <span style="color: red; "> {{ error }}</span>
+                {% endfor %}
+            </div>
 
-        <label for="ownerName"> Nombre del propietario </label>
-        <input type="text" name="ownerName" id="ownerName"> <br>
+            <div>
+                {{ form.ownerName.label }}
+                {{ form.ownerName(size=50) }} <br>
+                {% for error in form.ownerName.errors %}
+                <span style="color: red; "> {{ error }}</span>
+                {% endfor %}
+            </div>
 
-        <label for="ownerDni">DNI del propietario </label>
-        <input type="text" name="ownerDni" id="ownerDni"> <br>
+            <div>
+                {{ form.ownerDni.label }}
+                {{ form.ownerDni(size=50) }} <br>
+                {% for error in form.ownerDni.errors %}
+                <span style="color: red; "> {{ error }}</span>
+                {% endfor %}
+            </div>
 
-        <button type="submit" class="btn btn-primary">Enviar</button>
-        <!-- <input type="submit" id="" name="" value=""> -->
+            <div>
+                {{ form.submit() }}
+            </div>
+
     </form>
 {% endblock %} 

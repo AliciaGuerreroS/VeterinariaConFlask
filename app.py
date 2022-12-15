@@ -1,9 +1,16 @@
 from flask import Flask, render_template, request, url_for, redirect
 from pymongo import MongoClient
 from bson.objectid import ObjectId
+from forms import RegistrandoM
+from flask_wtf import CSRFProtect
+
+from config import Config
+
 
 
 app = Flask(__name__)
+app.config.from_object(Config)
+csrf = CSRFProtect()
 client= MongoClient('localhost', 27017)
 db = client.veterinaria
 insertDate_collection= db.insertDate   ##creando la coleccion
@@ -12,15 +19,26 @@ insertDate_collection= db.insertDate   ##creando la coleccion
 def hello():
     return "HELLO WORLD!"
 
+@app.route("/inicio")
+def inicio():
+    return "Mascota registrada!"
+
+
 @app.route("/registrarMascota/", methods= ["GET", "POST"])
 def vistaFormRegistro():
-    if request.method == 'POST':
-        petName= request.form['petName']
-        datePet= request.form['datePet']
-        race= request.form['race']
-        ownerName= request.form['ownerName']
-        ownerDni= request.form['ownerDni']
-    return render_template("registrar.html")
+    form = RegistrandoM()
+    if form.validate_on_submit():
+        petName= form.petName.data
+        datePet= form.datePet.data
+        race= form.race.data
+        ownerName= form.ownerName.data
+        ownerDni= form.ownerDni.data
+
+        next = request.args.get('next', None)
+        if next:
+            return redirect(next)
+        return redirect(url_for('inicio'))
+    return render_template("registrar.html", form= form)
     # return "Se han registrado los datos"
 
 # @app.route("/registrar", methods=['POST'])
