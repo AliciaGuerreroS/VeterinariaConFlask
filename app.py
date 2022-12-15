@@ -19,8 +19,10 @@ def registrar():
     race= request.form['race']
     ownerName= request.form['ownerName']
     ownerDni= request.form['ownerDni']
-    insertDate_collection.insert_one({'nombre_mascota': petName, 'fecha_nacimiento': datePet, 'raza': race, 'propietario': ownerName, 'DNI_propietario': ownerDni})
-
-
+    insertDate_collection.insert_one({'petName': petName, 'datePet': datePet, 'race': race, 'ownerName': ownerName, 'ownerDni': ownerDni})
+    insertDate= insertDate_collection.find()
+    return render_template('insert.html', insertDate= insertDate)
     
+
+
 

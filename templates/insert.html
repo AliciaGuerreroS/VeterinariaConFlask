@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+<div class="petName datePet race ownerName ownerDni">
+     <form method="post">
+      <div class="mb-3">
+          <p>
+              <b><label for="petName">Nombre de la mascota</label></b>
+          </p>
+          <p>
+              <input type="text" name="petName" placeholder="Ingrese el nombre de la mascota" class="form-control form-control-sm">
+          </p>
+          </p>
+      </div>
+      <div class="mb-3">
+          <p>
+              <b><label for="datePet">Fecha de nacimiento/ mascota</label></b>
+          </p>
+          <p>
+              <input type="text" name="datePet" placeholder="Ingrese la fecha de nacimiento/mascota" class="form-control form-control-sm">
+          </p>
+      </div>
+      <div class="mb-3">
+          <p>
+              <b><label for="race">Raza</label></b>
+          </p>
+          <p>
+              <input type="text" name="race" placeholder="Ingrese la raza/mascota" class="form-control form-control-sm">
+          </p>
+      </div>
+      <div class="mb-3">
+          <p>
+              <b><label for="ownerName">Nombre del propietario</label></b>
+          </p>
+          <p>
+              <input type="text" name="ownerName" placeholder="Ingrese el nombre del propietario" class="form-control form-control-sm">
+          </p>
+      </div>
+      <div class="mb-3">
+          <p>
+              <b><label for="ownerDni">DNI del propietario</label></b>
+          </p>
+          <p>
+              <input type="text" name="ownerDni" placeholder="Ingrese el DNI del propietario" class="form-control form-control-sm">
+          </p>
+      </div>
+      <button type="submit" class="btn btn-primary">Enviar</button>
+    </form>
+  
+  {% for date in insertDate %}
+    <div class="date">
+        <p>{{ date['petName','datePet', 'race', 'ownerName', 'ownerDni']}}</p>
+    </div>
+  {% endblock %}
