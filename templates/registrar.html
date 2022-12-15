@@ -1,53 +1,27 @@
 {% extends 'base.html' %}
 
-<div class="petName datePet race ownerName ownerDni">
-     <form method="post">
-      <div class="mb-3">
-          <p>
-              <b><label for="petName">Nombre de la mascota</label></b>
-          </p>
-          <p>
-              <input type="text" name="petName" placeholder="Ingrese el nombre de la mascota" class="form-control form-control-sm">
-          </p>
-          </p>
-      </div>
-      <div class="mb-3">
-          <p>
-              <b><label for="datePet">Fecha de nacimiento/ mascota</label></b>
-          </p>
-          <p>
-              <input type="text" name="datePet" placeholder="Ingrese la fecha de nacimiento/mascota" class="form-control form-control-sm">
-          </p>
-      </div>
-      <div class="mb-3">
-          <p>
-              <b><label for="race">Raza</label></b>
-          </p>
-          <p>
-              <input type="text" name="race" placeholder="Ingrese la raza/mascota" class="form-control form-control-sm">
-          </p>
-      </div>
-      <div class="mb-3">
-          <p>
-              <b><label for="ownerName">Nombre del propietario</label></b>
-          </p>
-          <p>
-              <input type="text" name="ownerName" placeholder="Ingrese el nombre del propietario" class="form-control form-control-sm">
-          </p>
-      </div>
-      <div class="mb-3">
-          <p>
-              <b><label for="ownerDni">DNI del propietario</label></b>
-          </p>
-          <p>
-              <input type="text" name="ownerDni" placeholder="Ingrese el DNI del propietario" class="form-control form-control-sm">
-          </p>
-      </div>
-      <button type="submit" class="btn btn-primary">Enviar</button>
+{% block title %}
+    <h1>Registro de usuarios</h1>
+{% endblock %}
+
+{% block body %}
+    <form action="" method="post">
+        <label for="petName">Nombe de la mascota</label>
+        <input type="text" name="petname" id="petname"> <br>
+
+        <label for="datePet">Fecha de nacimiento/mascota</label>
+        <input type="date" name="datePet" id="datePet"> <br>
+
+        <label for="race"> Raza </label>
+        <input type="text" name="race" id="race"> <br>
+
+        <label for="ownerName"> Nombre del propietario </label>
+        <input type="text" name="ownerName" id="ownerName"> <br>
+
+        <label for="ownerDni">DNI del propietario </label>
+        <input type="text" name="ownerDni" id="ownerDni"> <br>
+
+        <button type="submit" class="btn btn-primary">Enviar</button>
+        <!-- <input type="submit" id="" name="" value=""> -->
     </form>
-  
-  {% for date in insertDate %}
-    <div class="date">
-        <p>{{ date['petName','datePet', 'race', 'ownerName', 'ownerDni']}}</p>
-    </div>
-  {% endblock %}
+{% endblock %} 
