@@ -73,9 +73,40 @@ def mostrarMascota():
     #     return render_template("mostrarMascota.html", datos= datos)
     # else:
     #     print("No se encontraron los resultados")
-    
 
-#https://www.youtube.com/watch?v=A05cBJ_P7Q8
+
+@app.route('/formOrdenar', methods= ['GET','POST'])
+def formOrdenar():
+    if request.method == 'POST':
+        petName= request.form['petName']
+        datePet= request.form['datePet']
+        race= request.form['race']
+        ownerName= request.form['ownerName']
+        ownerDni= request.form['ownerDni']
+        if request.form == petName:
+            nameOrder= insertDate_collection.find().sort({'petName': 1})
+        elif request.form == datePet:
+            dateOrder= insertDate_collection.find().sort({'datePet': 1})
+        elif request.form == race:
+            raceOrder= insertDate_collection.find().sort({'race': 1})
+        elif request.form == ownerName:
+            ownerNameOrder= insertDate_collection.find().sort({'ownerName': 1})
+        elif request.form == ownerDni:
+            ownerDniOrder= insertDate_collection.find().sort({'ownerDni': 1})
+    opciones= [nameOrder, dateOrder, raceOrder, ownerDniOrder, ownerNameOrder]
+    return render_template('formOp.html', opciones)
+
+# @app.route('/ordenar', methods=['GET', 'POST'])
+# def ordemar():
+#     if request.method == 'POST':
+#         solicitud= request.form['solicitud']
+#         if solicitud == 1 or solicitud == 2 or solicitud == 3 or solicitud == 4 or solicitud == 5 :
+#             opcion= insertDate_collection.find('petName': solicitud).sort({''})
+
+
+
+
+
 
 
 

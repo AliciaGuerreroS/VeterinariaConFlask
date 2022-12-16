@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+
+{% block body %}
+<div class="">
+    <form action="" method="post">
+        <p>
+            <b><label for="">Opciones</label></b>
+        </p>
+
+        <p>
+            <input id="datePet" name="datePet" required type="radio" value="datePet">
+            <label for="datePet">Ordenar por fecha</label>
+        </p>
+
+        <p>
+            <input id="petName" name="petName" required type="radio" value="petName">
+            <label for="petName">Ordenar por nombre de Mascotra</label>
+        </p>
+
+        <p>
+            <input id="ownerName" name="ownerName" required type="radio" value="ownerName">
+            <label for="ownerName">Ordenar por propietario</label>
+        </p>
+
+        <p>
+            <input id="" name="ownerDni" required type="radio" value="ownerDni">
+            <label for="ownerDni">Ordenar por DNI propietario</label>
+        </p>
+
+        <p>
+            <input id="race" name="race" required type="radio" value="race">
+            <label for="race">Ordenar por raza</label>
+        </p>
+
+        <button type="submit">Enviar </button>
+
+    </form>
+</div>
+{% endblock %}

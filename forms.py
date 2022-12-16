@@ -15,3 +15,7 @@ class BuscarMascotE(FlaskForm):
     petName= StringField('Nombre_mascota', validators=[DataRequired(), Length(max=50)])
     ownerDni= StringField('DNI_propietario', validators=[DataRequired(), Length(max=50)])
     submit= SubmitField('Buscar')
+
+
+
+    
