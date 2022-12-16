@@ -1,1 +1,16 @@
 {% extends 'base.html' %}
+
+
+{% block body %}
+
+    {% for dato in datos %}
+    <div class="dato">
+        <p>  {{ dato['petName'] }}  </p>
+        <p>  {{ dato['datePet'] }} </p>
+        <p>  {{ dato['race'] }} </p>
+        <p>  {{ dato['ownerName'] }} </p>
+        <p>  {{ dato['ownerDni'] }} </p>
+    </div>
+    {% endfor %}
+
+{% endblock %}

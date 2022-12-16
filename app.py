@@ -48,15 +48,23 @@ def vistaFormRegistro():
         return redirect(url_for('inicio'))
     return render_template("registrar.html", form= form)
 
+
+
 @app.route("/buscarMascota/", methods= ['GET', 'POST'])
-def mostrarMascota():
+def buscarMascota():
     form= BuscarMascotE()
     if request.method == 'POST' and form.validate_on_submit():
         petName= form.petName.data
         ownerDni= form.ownerDni.data
-        print(petName, ownerDni)
+        #print(petName, ownerDni)
+        datos= insertDate_collection.find({'petName': petName, 'ownerDni': ownerDni})
+        return redirect(url_for('mostrarMascota'), datos= datos)
     return render_template('buscarMascota.html', form= form)
-        
+
+
+@app.route("/mostrarMascota")
+def mostrarMascota():
+    return render_template("mostrarMascota.html")
     
 
 
