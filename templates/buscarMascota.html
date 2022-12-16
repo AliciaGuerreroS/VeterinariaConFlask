@@ -6,25 +6,26 @@
 
 
 {% block body %}
-    <form action="" method="get">
+    <form action="" method="post">
+        {{ form.hidden_tag() }}
         <div>
-            {{ form.nombreM.label }}
-            {{ form.nombreM }} <br>
+            {{ form.petName.label }}
+            {{ form.petName }} <br>
         </div>
 
         <div>
-        {{ form.dnipropietario.label }}
-        {{ form.dnipropietario }} <br>
+        {{ form.ownerDni.label }}
+        {{ form.ownerDni }} <br>
         </div>
 
         <div>
-            {{ form.buscar() }}
+            {{ form.submit() }}
         </div>
     </form>
 <hr>
-{% for dato in datos %}
+<!-- {% for dato in datos %}
     <div class="dato">
         <p>{{ dato['nombreM'] }}  {{ dato['dnipropietario'] }}</p>
     </div>
-{% endfor %}
+{% endfor %} -->
 {% endblock %}

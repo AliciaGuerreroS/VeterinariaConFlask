@@ -12,6 +12,6 @@ class RegistrandoM(FlaskForm):
     submit= SubmitField('Enviar')
 
 class BuscarMascotE(FlaskForm):
-    nombreM= StringField('Ingrese el nombre de la mascota', validators=[DataRequired(), Length(max=50)])
-    dnipropietario= StringField('Ingrese el DNI del propietario', validators=[DataRequired(), Length(max=50)])
-    buscar= SubmitField('Buscar')
+    petName= StringField('Nombre_mascota', validators=[DataRequired(), Length(max=50)])
+    ownerDni= StringField('DNI_propietario', validators=[DataRequired(), Length(max=50)])
+    submit= SubmitField('Buscar')
