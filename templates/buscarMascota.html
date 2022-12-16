@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    <h1>Buscar mascota en Especifico</h1>
+{% endblock %}
+
+
+{% block body %}
+    <form action="" method="get">
+        <div>
+            {{ form.nombreM.label }}
+            {{ form.nombreM }} <br>
+        </div>
+
+        <div>
+        {{ form.dnipropietario.label }}
+        {{ form.dnipropietario }} <br>
+        </div>
+
+        <div>
+            {{ form.buscar() }}
+        </div>
+    </form>
+<hr>
+{% for dato in datos %}
+    <div class="dato">
+        <p>{{ dato['nombreM'] }}  {{ dato['dnipropietario'] }}</p>
+    </div>
+{% endfor %}
+{% endblock %}

@@ -17,7 +17,7 @@
 
         <div>
             {{ form.datePet.label }}
-            {{ form.datePet(size=50) }} <br>
+            {{ form.datePet }} <br>
             {% for error in form.datePet.errors %}
             <span style="color: red; "> {{ error }}</span>
             {% endfor %}
