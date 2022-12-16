@@ -40,7 +40,6 @@ def vistaFormRegistro():
         ownerName= form.ownerName.data
         ownerDni= form.ownerDni.data
         print(petName, datePet, race, ownerName, ownerDni)
-        # # insertDate_collection.insert_one({'petName': petName, 'race': race, 'ownerName': ownerName, 'ownerDni': ownerDni})
         insertDate_collection.insert_one({'petName': petName, 'datePet': final_date, 'race': race, 'ownerName': ownerName, 'ownerDni': ownerDni})
 
         next = request.args.get('next', None)
@@ -60,18 +59,20 @@ def buscarMascota():
         petName= form.petName.data
         ownerDni= form.ownerDni.data
         datos1= insertDate_collection.find({'petName': petName, 'ownerDni': ownerDni})
-        print(petName, ownerDni)
-        if datos1 == True:
-            return redirect(url_for('mostrarMascota'))
-        else:
-            print('Los resultados no coinciden')
+        #print(petName, ownerDni)
+        return redirect(url_for('mostrarMascota'))
     return render_template('buscarMascota.html', form= form)
 
 
-@app.route("/mostrarMascota")
+@app.route("/mostrarMascota", methods= ['GET'])
 def mostrarMascota():
     datos= insertDate_collection.find({'petName': petName, 'ownerDni': ownerDni})
+    print(datos)
     return render_template("mostrarMascota.html", datos= datos)
+    # if datos == True:
+    #     return render_template("mostrarMascota.html", datos= datos)
+    # else:
+    #     print("No se encontraron los resultados")
     
 
 #https://www.youtube.com/watch?v=A05cBJ_P7Q8
