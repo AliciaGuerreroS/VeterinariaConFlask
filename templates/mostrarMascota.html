@@ -2,7 +2,10 @@
 
 
 {% block body %}
+{% if datos.empty %}
+    <p>vacio</p>
 
+{% else %}
     {% for dato in datos %}
     <div class="dato">
         <p>  {{ dato['petName'] }}  </p>
@@ -12,5 +15,5 @@
         <p>  {{ dato['ownerDni'] }} </p>
     </div>
     {% endfor %}
-
+{% endif %}
 {% endblock %}
