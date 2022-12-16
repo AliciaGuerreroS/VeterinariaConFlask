@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, url_for, redirect
+from flask import Flask, render_template, request, url_for, redirect, jsonify
 from pymongo import MongoClient
 from bson.objectid import ObjectId
 from forms import RegistrandoM, BuscarMascotE
@@ -14,6 +14,7 @@ csrf = CSRFProtect()
 client= MongoClient('localhost', 27017)
 db = client.veterinaria
 insertDate_collection= db.insertDate   ##creando la coleccion
+foudDate_collection= db.foundDate
 
 
 
@@ -52,19 +53,25 @@ def vistaFormRegistro():
 
 @app.route("/buscarMascota/", methods= ['GET', 'POST'])
 def buscarMascota():
+    global petName
+    global ownerDni
     form= BuscarMascotE()
     if request.method == 'POST' and form.validate_on_submit():
         petName= form.petName.data
         ownerDni= form.ownerDni.data
-        #print(petName, ownerDni)
-        datos= insertDate_collection.find({'petName': petName, 'ownerDni': ownerDni})
-        return redirect(url_for('mostrarMascota'), datos= datos)
+        datos1= insertDate_collection.find({'petName': petName, 'ownerDni': ownerDni})
+        print(petName, ownerDni)
+        if datos1 == True:
+            return redirect(url_for('mostrarMascota'))
+        else:
+            print('Los resultados no coinciden')
     return render_template('buscarMascota.html', form= form)
 
 
 @app.route("/mostrarMascota")
 def mostrarMascota():
-    return render_template("mostrarMascota.html")
+    datos= insertDate_collection.find({'petName': petName, 'ownerDni': ownerDni})
+    return render_template("mostrarMascota.html", datos= datos)
     
 
 #https://www.youtube.com/watch?v=A05cBJ_P7Q8
