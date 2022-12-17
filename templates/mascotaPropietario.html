@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+
+{% block body %}
+{% if datos == "" %}
+    <p>vacio</p>
+
+{% else %}
+    {% for datos in datosMascota %}
+    <div class="dato">
+        <p>  {{ datos['petName'] }}  </p>
+        <p>  {{ datos['datePet'] }} </p>
+        <p>  {{ datos['race'] }} </p>
+        <p>  {{ datos['ownerName'] }} </p>
+        <p>  {{ datos['ownerDni'] }} </p>
+    </div>
+    {% endfor %}
+{% endif %}
+{% endblock %}

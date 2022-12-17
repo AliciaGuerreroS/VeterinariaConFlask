@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    <h1>Escriba su Dni para buscar los registros</h1>
+{% endblock %}
+
+
+{% block body %}
+    <form action="" method="post">
+        {{ form.hidden_tag() }}
+        
+        <div>
+        {{ form.ownerDni.label }}
+        {{ form.ownerDni }} <br>
+        </div>
+
+        <div>
+            {{ form.submit() }}
+        </div>
+    </form>
+<hr>
+    
+
+{% endblock %}

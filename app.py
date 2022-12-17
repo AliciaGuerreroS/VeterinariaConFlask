@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, url_for, redirect, jsonify
 from pymongo import MongoClient
 from bson.objectid import ObjectId
-from forms import RegistrandoM, BuscarMascotE
+from forms import RegistrandoM, BuscarMascotE, MascotaPropietario
 from flask_wtf import CSRFProtect
 from config import Config
 import datetime
@@ -60,6 +60,18 @@ def buscarMascota():
         return render_template('mostrarMascota.html', datos= datos1)
     return render_template('buscarMascota.html', form= form)
 
+##ordenar mascota
+
+
+##•	Listar todas las mascotas de un determinado propietario.
+@app.route("/mascotaPropietario/", methods= ['GET', 'POST'])
+def mascotaPropietario():
+    form= MascotaPropietario()
+    if request.method == 'POST' and form.validate_on_submit():
+        ownerDni= form.ownerDni.data
+        datos2= db.mascotas.find({'ownerDni': ownerDni})
+        return render_template('mascotaPropietario.html', datosMascota= datos2)
+    return render_template('formBPropietario.html', form= form)
 
 
 
@@ -69,25 +81,6 @@ def buscarMascota():
 
 
 
-
-
-# @app.route('/formOrdenar', methods= ['GET','POST'])
-# def formOrdenar():
-#     if request.method == 'POST':
-#         petName= request.form['petName']
-#         datePet= request.form['datePet']
-#         race= request.form['race']
-#         ownerName= request.form['ownerName']
-#         ownerDni= request.form['ownerDni']
-#         opciones= [nameOrder, dateOrder, raceOrder, ownerDniOrder, ownerNameOrder]
-#     return render_template('formOp.html', opciones)
-
-# @app.route('/ordenar', methods=['GET', 'POST'])
-# def ordemar():
-#     if request.method == 'POST':
-#         solicitud= request.form['solicitud']
-#         if solicitud == 1 or solicitud == 2 or solicitud == 3 or solicitud == 4 or solicitud == 5 :
-#             opcion= insertDate_collection.find('petName': solicitud).sort({''})
 
 
 
