@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% block body %}
+<h1>Lista de opciones</h1>
+
+    <a href="{{ url_for('porFecha',user=mascotas.datePet) }}">Ordenar por Fecha</a>
+    <a href="{{ url_for('porNombre',user=mascotas.petName) }}">Ordenar por nombre</a> <br>
+    <a href="{{ url_for('porRaza',user=mascotas.race) }}">Ordenar por raza</a> <br>
+    <a href="{{ url_for('porNPropietario',user=mascotas.ownerName) }}">Ordenar por Nombre del Propietario</a> <br>
+    <a href="{{ url_for('porDniPropietario',user=mascotas.ownerDni) }}">Ordenar por DNI del Propietario</a> <br>
+
+
+{% endblock body %}
+
+{% endblock content %}

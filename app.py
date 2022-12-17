@@ -22,12 +22,44 @@ db= client["dbveterinaria"]
 def hello():
     return "HELLO WORLD!"
 
+
+##•	Listar todas las mascotas registradas en la veterinaria ordenadas por: fecha de nacimiento, nombre, raza o nombre del propietario.
+@app.route('/opciones')
+def opciones():
+    mascotas=db.mascotas.find().sort('petName',1)
+    return render_template("opciones.html", mascotas= mascotas)
+
+@app.route("/porNombre", methods= ['GET', 'POST'])
+def porNombre():
+    mascotas=db.mascotas.find().sort('petName',1)
+    return render_template("pruebaMostrar.html", mascotas=mascotas)
+
+@app.route("/porRaza", methods= ['GET', 'POST'])
+def porRaza():
+    mascotas=db.mascotas.find().sort('race',1)
+    return render_template("pruebaMostrar.html", mascotas=mascotas)
+
+@app.route("/porNPropietario", methods= ['GET', 'POST'])
+def porNPropietario():
+    mascotas=db.mascotas.find().sort('ownerName',1)
+    return render_template("pruebaMostrar.html", mascotas=mascotas)
+
+@app.route("/porDniPropietario", methods= ['GET', 'POST'])
+def porDniPropietario():
+    mascotas=db.mascotas.find().sort('ownerDni',1)
+    return render_template("pruebaMostrar.html", mascotas=mascotas)
+
+@app.route("/porFecha", methods= ['GET', 'POST'])
+def porFecha():
+    mascotas=db.mascotas.find().sort('datePet',1)
+    return render_template("pruebaMostrar.html", mascotas=mascotas)
+
 @app.route("/inicio")
 def inicio():
     return "Mascota registrada!"
 
 
-##registrar mascota
+##•	Registrar los datos de una mascota.
 @app.route("/registrarMascota/", methods= ["GET", "POST"])
 def vistaFormRegistro():
     form = RegistrandoM()
@@ -49,7 +81,7 @@ def vistaFormRegistro():
     return render_template("registrar.html", form= form)
 
 
-##buscar mascota
+##•	Mostrar los datos de una determinada mascota.
 @app.route("/buscarMascota/", methods= ['GET', 'POST'])
 def buscarMascota():
     form= BuscarMascotE()
@@ -59,8 +91,6 @@ def buscarMascota():
         datos1= db.mascotas.find({'petName': petName, 'ownerDni': ownerDni})
         return render_template('mostrarMascota.html', datos= datos1)
     return render_template('buscarMascota.html', form= form)
-
-##ordenar mascota
 
 
 ##•	Listar todas las mascotas de un determinado propietario.
@@ -73,7 +103,7 @@ def mascotaPropietario():
         return render_template('mascotaPropietario.html', datosMascota= datos2)
     return render_template('formBPropietario.html', form= form)
 
-
+##•	Actualizar los datos de una mascota.
 
 
 

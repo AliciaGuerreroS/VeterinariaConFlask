@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+
+{% block body %}
+
+
+{% for mascota in mascotas %}
+<div class="mascota">
+    <p> {{ mascota.petName }} </p>
+    <p> {{ mascota.datePet }} </p>
+    <p> {{ mascota.race }} </p>
+    <p> {{ mascota.ownerName }} </p>
+    <p> {{ mascota.ownerDni }} </p>
+
+</div>
+{% endfor %}
+
+
+{% endblock %}
