@@ -13,9 +13,9 @@ app.config.from_object(Config)
 csrf = CSRFProtect()
 client= MongoClient('localhost', 27017)
 db = client.veterinaria
-insertDate_collection= db.insertDate   ##creando la coleccion
-foudDate_collection= db.foundDate
-
+# insertDate_collection= db.insertDate   ##creando la coleccion
+# foudDate_collection= db.foundDate
+db= client["dbveterinaria"]
 
 
 @app.route("/")
@@ -27,7 +27,7 @@ def inicio():
     return "Mascota registrada!"
 
 
-
+##registrar mascota
 @app.route("/registrarMascota/", methods= ["GET", "POST"])
 def vistaFormRegistro():
     form = RegistrandoM()
@@ -40,7 +40,7 @@ def vistaFormRegistro():
         ownerName= form.ownerName.data
         ownerDni= form.ownerDni.data
         print(petName, datePet, race, ownerName, ownerDni)
-        insertDate_collection.insert_one({'petName': petName, 'datePet': final_date, 'race': race, 'ownerName': ownerName, 'ownerDni': ownerDni})
+        db.mascotas.insert_one({'petName': petName, 'datePet': final_date, 'race': race, 'ownerName': ownerName, 'ownerDni': ownerDni})
 
         next = request.args.get('next', None)
         if next:
@@ -49,30 +49,26 @@ def vistaFormRegistro():
     return render_template("registrar.html", form= form)
 
 
-
+##buscar mascota
 @app.route("/buscarMascota/", methods= ['GET', 'POST'])
 def buscarMascota():
-    global petName
-    global ownerDni
     form= BuscarMascotE()
     if request.method == 'POST' and form.validate_on_submit():
         petName= form.petName.data
         ownerDni= form.ownerDni.data
-        datos1= insertDate_collection.find({'petName': petName, 'ownerDni': ownerDni})
-        #print(petName, ownerDni)
-        return redirect(url_for('mostrarMascota'))
+        datos1= db.mascotas.find({'petName': petName, 'ownerDni': ownerDni})
+        return render_template('mostrarMascota.html', datos= datos1)
     return render_template('buscarMascota.html', form= form)
 
 
-@app.route("/mostrarMascota", methods= ['GET'])
-def mostrarMascota():
-    datos= insertDate_collection.find({'petName': petName, 'ownerDni': ownerDni})
-    print(datos)
-    return render_template("mostrarMascota.html", datos= datos)
-    # if datos == True:
-    #     return render_template("mostrarMascota.html", datos= datos)
-    # else:
-    #     print("No se encontraron los resultados")
+
+
+
+
+
+
+
+
 
 
 # @app.route('/formOrdenar', methods= ['GET','POST'])
