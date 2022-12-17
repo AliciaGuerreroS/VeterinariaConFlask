@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    <h1>Buscar mascota en Especifico</h1>
+{% endblock %}
+
+
+{% block body %}
+    <form action="" method="post">
+        {{ form.hidden_tag() }}
+        <div>
+            {{ form.petName.label }}
+            {{ form.petName }} <br>
+        </div>
+
+        <div>
+        {{ form.ownerDni.label }}
+        {{ form.ownerDni }} <br>
+        </div>
+
+        <div>
+            {{ form.submit() }}
+        </div>
+    </form>
+<hr>
+    
+
+{% endblock %}

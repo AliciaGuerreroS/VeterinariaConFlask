@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+
+{% block body %}
+
+    {% for actualizado in actualizados %}
+    <div class="actualizado">
+        <p>  {{ actualizado['petName'] }}  </p>
+        <p>  {{ actualizado['datePet'] }} </p>
+        <p>  {{ actualizado['race'] }} </p>
+        <p>  {{ actualizado['ownerName'] }} </p>
+        <p>  {{ actualizado['ownerDni'] }} </p>
+    </div>
+    {% endfor %}
+{% endif %}
+{% endblock %}

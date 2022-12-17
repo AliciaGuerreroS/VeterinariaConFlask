@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, url_for, redirect, jsonify
 from pymongo import MongoClient
 from bson.objectid import ObjectId
-from forms import RegistrandoM, BuscarMascotE, MascotaPropietario
+from forms import RegistrandoM, BuscarMascotE, MascotaPropietario, ActualizarDato
 from flask_wtf import CSRFProtect
 from config import Config
 import datetime
@@ -54,12 +54,12 @@ def porFecha():
     mascotas=db.mascotas.find().sort('datePet',1)
     return render_template("pruebaMostrar.html", mascotas=mascotas)
 
+##•	Registrar los datos de una mascota.
+
 @app.route("/inicio")
 def inicio():
     return "Mascota registrada!"
 
-
-##•	Registrar los datos de una mascota.
 @app.route("/registrarMascota/", methods= ["GET", "POST"])
 def vistaFormRegistro():
     form = RegistrandoM()
@@ -105,6 +105,21 @@ def mascotaPropietario():
 
 ##•	Actualizar los datos de una mascota.
 
+@app.route("/actualizarMascota", methods= ['GET', 'POST'])
+def actualizarMascota():
+    form= ActualizarDato()
+    if request.method == 'POST' and form.validate_on_submit():
+        petName= form.petName.data
+        datePet= form.datePet.data
+        time = datetime.datetime.min.time()
+        final_date = datetime.datetime.combine(datePet, time)
+        race= form.race.data
+        ownerName= form.ownerName.data
+        ownerDni= form.ownerDni.data
+        db.mascotas.find({'petName': petName, 'ownerDni': ownerDni})
+        actualizados= db.mascotas.update_one({'ownerDni': ownerDni}, {'$set': {'petName': petName, 'datePet': final_date, 'race': race, 'ownerName': ownerName, 'ownerDni': ownerDni}})
+        return render_template('datosActualizados.html', actualizados= actualizados)
+    return render_template('buscarDatosActualizar.html', form= form)
 
 
 
